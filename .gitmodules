@@ -1,0 +1,6 @@
+[submodule "lib/daisyHat"]
+	path = lib/daisyHat
+	url = https://github.com/TheSlowGrowth/daisyHat.git
+[submodule "lib/libDaisy"]
+	path = lib/libDaisy
+	url = https://github.com/TheSlowGrowth/libDaisy.git
