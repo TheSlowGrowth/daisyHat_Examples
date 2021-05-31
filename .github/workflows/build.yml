@@ -5,14 +5,16 @@ on:
   # Run for all commits on feature branches
   push:
     paths:
-    - 'src/**'
+    - 'lib/**'
     - 'tests/**'
     - '.github/workflows/**'
+    - 'CMakeLists.txt'
   pull_request:
     paths:
-    - 'src/**'
+    - 'lib/**'
     - 'tests/**'
     - '.github/workflows/**'
+    - 'CMakeLists.txt'
 
 jobs:
   build:
@@ -26,3 +28,12 @@ jobs:
     - name: Configure
       run: |
         cmake -D TOOLCHAIN_PREFIX=${GCC_ARM_NONE_EABI_PATH} -D CMAKE_TOOLCHAIN_FILE="lib/libDaisy/cmake/toolchains/stm32h750xx.cmake" -S . -B build -G "Unix Makefiles"
+
+    - name: Build
+      run: |
+        cmake --build build
+
+    - name: Test
+      working-directory: ./build
+      run: |
+        ctest -VV

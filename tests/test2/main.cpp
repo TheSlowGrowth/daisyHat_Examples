@@ -9,8 +9,8 @@ int main()
     seed.Init();
 
     daisyhat::StartTest(seed, "test2");
-    int a = 1;
-    int b = 2;
-    EXPECT_EQ(a, b);
+    const char* a = "StringA";
+    const char* b = "StringB";
+    EXPECT_STREQ(a, b);
     daisyhat::FinishTest();
 }
