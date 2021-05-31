@@ -1,0 +1,28 @@
+name: Build
+
+on:
+  # run for all pull requests
+  # Run for all commits on feature branches
+  push:
+    paths:
+    - 'src/**'
+    - 'tests/**'
+    - '.github/workflows/**'
+  pull_request:
+    paths:
+    - 'src/**'
+    - 'tests/**'
+    - '.github/workflows/**'
+
+jobs:
+  build:
+    runs-on: [self-hosted, daisyHat]
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        submodules: recursive
+
+    - name: Configure
+      run: |
+        cmake -D TOOLCHAIN_PREFIX=${GCC_ARM_NONE_EABI_PATH} -D CMAKE_TOOLCHAIN_FILE="lib/libDaisy/cmake/toolchains/stm32h750xx.cmake" -S . -B build -G "Unix Makefiles"
