@@ -1,3 +1,4 @@
+cmake_policy(SET CMP0048 NEW)
 project (daisyHatExamples)
 cmake_minimum_required(VERSION 3.19)
 
