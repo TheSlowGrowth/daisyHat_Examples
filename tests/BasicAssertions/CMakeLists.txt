@@ -1,5 +1,6 @@
 daisyhat_add_test(
-    NAME test2
+    NAME BasicAssertions
+    SEED Alice
     SOURCES 
         main.cpp
 )

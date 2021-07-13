@@ -1,0 +1,8 @@
+{
+    "seeds": {
+        "Alice": {
+            "openOcdCfg": "interface/stlink.cfg",
+            "serialDevice": "COM4"
+        }
+    }
+}

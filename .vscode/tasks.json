@@ -1,0 +1,146 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "configure",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "-D",
+                "TOOLCHAIN_PREFIX=\"${env:HOME}/dev/gcc-arm-none-eabi-9-2020-q2-update\"",
+                "-D",
+                "CMAKE_TOOLCHAIN_FILE=\"lib/libDaisy/cmake/toolchains/stm32h750xx.cmake\"",
+                "-D",
+                "LIBDAISY_DIR=\"lib/libDaisy\"",
+                "-S",
+                ".",
+                "-B",
+                "build",
+                "-D",
+                "CMAKE_EXPORT_COMPILE_COMMANDS=1",
+                "-G",
+                "\"Unix Makefiles\""
+            ],
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            "windows": {
+                "command": "cmake.exe",
+                "args": [
+                    "-D",
+                    "TOOLCHAIN_PREFIX=\\\"C:/Program Files (x86)/GNU Arm Embedded Toolchain/9 2020-q2-update\\\"",
+                    "-D",
+                    "CMAKE_TOOLCHAIN_FILE=\\\"lib/libDaisy/cmake/toolchains/stm32h750xx.cmake\\\"",
+                    "-D",
+                    "LIBDAISY_DIR=\\\"lib/libDaisy\\\"",
+                    "-S",
+                    ".",
+                    "-B",
+                    "build",
+                    "-D",
+                    "CMAKE_EXPORT_COMPILE_COMMANDS=1",
+                    "-G",
+                    "\\\"Unix Makefiles\\\""
+                ],
+            },
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "configure (debug)",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "-D",
+                "TOOLCHAIN_PREFIX=\"${env:HOME}/dev/gcc-arm-none-eabi-9-2020-q2-update\"",
+                "-D",
+                "CMAKE_TOOLCHAIN_FILE=\"lib/libDaisy/cmake/toolchains/stm32h750xx.cmake\"",
+                "-D",
+                "LIBDAISY_DIR=\"lib/libDaisy\"",
+                "-D",
+                "CMAKE_BUILD_TYPE=Debug",
+                "-S",
+                ".",
+                "-B",
+                "build",
+                "-D",
+                "CMAKE_EXPORT_COMPILE_COMMANDS=1",
+                "-G",
+                "\"Unix Makefiles\""
+            ],
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            "windows": {
+                "command": "cmake.exe",
+                "args": [
+                    "-D",
+                    "TOOLCHAIN_PREFIX=\\\"C:/Program Files (x86)/GNU Arm Embedded Toolchain/9 2020-q2-update\\\"",
+                    "-D",
+                    "CMAKE_TOOLCHAIN_FILE=\\\"lib/libDaisy/cmake/toolchains/stm32h750xx.cmake\\\"",
+                    "-D",
+                    "LIBDAISY_DIR=\\\"lib/libDaisy\\\"",
+                    "-D",
+                    "CMAKE_BUILD_TYPE=Debug",
+                    "-S",
+                    ".",
+                    "-B",
+                    "build",
+                    "-D",
+                    "CMAKE_EXPORT_COMPILE_COMMANDS=1",
+                    "-G",
+                    "\\\"Unix Makefiles\\\""
+                ],
+            },
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "build"
+            ],
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            "group": "build",
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "run",
+            "type": "shell",
+            "command": "ctest",
+            "args": [
+                "-VV"
+            ],
+            "options": {
+                "cwd": "${workspaceRoot}/build",
+                "env": {
+                    "DAISYHAT_CONFIG_FILE_OVERRIDE": "${workspaceRoot}/daisyHat.local.config.json"
+                }
+            },
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "clean",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "clean"
+            ],
+            "options": {
+                "cwd": "${workspaceRoot}/build"
+            },
+            "group": "build",
+            "problemMatcher": []
+        }
+    ]
+}
